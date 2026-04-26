@@ -1,0 +1,129 @@
+
+
+
+
+
+
+
+/* form.css */
+
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(to right, #a1c4fd, #c2e9fb); /* Sky blue gradient */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Main container */
+.container {
+  background-color: #ffffff;
+  padding: 40px 50px;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 420px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+}
+
+/* Form header */
+.container::before {
+  content: "🎓 Student Registration Form";
+  display: block;
+  font-size: 22px;
+  font-weight: 600;
+  color: #0077b6;
+  margin-bottom: 20px;
+}
+
+/* Label styling */
+label {
+  display: block;
+  text-align: left;
+  margin-top: 15px;
+  font-weight: 600;
+  color: #023e8a;
+}
+
+/* Input and select boxes */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 6px;
+  border: 2px solid #caf0f8;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #333;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+/* Focus effect */
+input:focus,
+select:focus {
+  border-color: #0077b6;
+  background-color: #e0f7ff;
+  box-shadow: 0 0 8px rgba(0, 119, 182, 0.3);
+  outline: none;
+}
+
+/* Submit button */
+button {
+  margin-top: 25px;
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to right, #00b4d8, #0077b6);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Hover effects */
+button:hover {
+  background: linear-gradient(to right, #0096c7, #005f99);
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 119, 182, 0.3);
+}
+
+/* Placeholder text style */
+::placeholder {
+  color: #999;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .container {
+    padding: 25px;
+  }
+
+  .container::before {
+    font-size: 18px;
+  }
+
+  button {
+    font-size: 15px;
+  }
+}

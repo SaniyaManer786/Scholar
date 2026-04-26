@@ -1,0 +1,109 @@
+/* ===== GLOBAL RESET ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html,body { height: 100%; }
+body {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: linear-gradient(180deg,#dcedff 0%, #bbdefb 100%);
+  color: #073763;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.2rem;
+}
+
+/* ===== HEADER ===== */
+.header {
+  width: 100%;
+  max-width: 1100px;
+  background: linear-gradient(90deg,#083d77,#1565c0);
+  color: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 28px rgba(3,37,76,0.18);
+}
+.header .title {
+  padding: 1.1rem 1.2rem;
+  text-align: center;
+}
+.header h1 { font-size: 1.6rem; letter-spacing: 0.6px; margin-bottom: 0.2rem; font-weight: 700; }
+.instruction {
+  background: rgba(255,255,255,0.06);
+  padding: 0.55rem 1.2rem;
+  text-align: center;
+  color: rgba(227,242,253,0.95);
+  font-size: 0.98rem;
+}
+
+/* ===== FORM CARD ===== */
+.card {
+  width: 100%;
+  max-width: 1100px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 14px;
+  padding: 1.2rem;
+  box-shadow: 0 10px 35px rgba(13, 71, 161, 0.12);
+  border-left: 6px solid rgba(13,71,161,0.08);
+}
+
+form.profile-form {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.section {
+  background: linear-gradient(180deg, rgba(13,71,161,0.03), transparent);
+  border-radius: 10px;
+  padding: 1rem;
+  border: 1px solid rgba(13,71,161,0.06);
+}
+
+.section-header {
+  display:flex;
+  align-items:center;
+  gap:0.6rem;
+  margin-bottom:0.8rem;
+}
+.section-header h2 {
+  color: #0d47a1;
+  font-size:1.05rem;
+  font-weight:700;
+}
+.hint { font-size:0.9rem; color:#1565c0; opacity:0.85; }
+
+.grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap:1rem; }
+.grid-3 { display:grid; grid-template-columns: repeat(3,1fr); gap:1rem; }
+.form-row { display:flex; flex-direction:column; gap:0.35rem; margin-bottom:0.25rem; }
+label { font-weight:600; color:#073763; font-size:0.95rem; }
+input[type="text"], input[type="email"], input[type="number"], select {
+  padding:0.65rem; border-radius:7px; font-size:0.98rem; border:1.8px solid rgba(9,88,173,0.18);
+  background:#f6fbff; outline:none; transition: all .18s ease;
+}
+input:focus, select:focus { border-color: #1565c0; box-shadow: 0 4px 14px rgba(21,101,192,0.12); background: #ffffff; }
+
+.inline-group { display:flex; gap:1rem; align-items:center; flex-wrap:wrap; }
+.inline-group label { font-weight:500; font-size:0.92rem; }
+.inline-group input[type="radio"], .inline-group input[type="checkbox"] { transform:scale(1.05); margin-right:0.35rem; }
+
+.form-actions { text-align:center; margin-top:0.6rem; padding-top:0.6rem; }
+.submit-btn {
+  background: linear-gradient(90deg,#083d77,#0d47a1);
+  color:#fff; border:none; padding:0.85rem 1.6rem;
+  border-radius:9px; font-weight:700; font-size:1rem; cursor:pointer;
+  box-shadow: 0 8px 20px rgba(13,71,161,0.12);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.submit-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(13,71,161,0.16); }
+
+.note { text-align:center; font-size:0.9rem; color:#0d47a1; margin-top:0.6rem; }
+.success-message { display:none; margin-top:0.7rem; text-align:center; color: #1b5e20; font-weight:700; background: #e8f5e9; padding:0.5rem; border-radius:8px; border:1px solid rgba(27,94,32,0.08); }
+
+/* Scholarship result cards */
+.scholarship-card {
+  background: #ffffff; border-radius: 10px; padding: 1rem;
+  box-shadow: 0 6px 20px rgba(13,71,161,0.1); margin-bottom: 1rem;
+}
+.scholarship-card h3 { color: #0d47a1; margin-bottom: 0.5rem; }
+
+@media (max-width:900px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }

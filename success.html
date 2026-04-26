@@ -1,0 +1,64 @@
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Successful</title>
+  <link rel="stylesheet" href="success.css">
+</head>
+<body>
+  <div class="message-container">
+    <h2>🎉 Registration Successful!</h2>
+    <p>Your account has been created successfully.<br>Welcome to our student portal.</p>
+    <div class="btn-group">
+      <a href="login.html" class="btn">Go to Login Page</a>
+      <a href="index.html" class="btn">Go Back to Home</a>
+      <button id="updateBtn" class="btn update-btn">Update Registration</button>
+      <button id="deleteBtn" class="btn delete-btn">Delete Registration</button>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get("email");
+
+    if (!email) {
+      alert("⚠️ User email missing! Please access this page after login or registration.");
+    }
+
+    // ✅ Delete user
+    document.getElementById("deleteBtn").addEventListener("click", async () => {
+      if (!email) return alert("User email missing — cannot delete!");
+      if (confirm("Are you sure you want to delete your registration?")) {
+        const res = await fetch(`/delete/${email}`, { method: "DELETE" });
+        if (res.ok) {
+          alert("✅ Registration deleted successfully!");
+          window.location.href = "/index.html";
+        } else {
+          alert("⚠️ Error deleting registration");
+        }
+      }
+    });
+
+    // ✅ Update user
+    document.getElementById("updateBtn").addEventListener("click", () => {
+      if (!email) return alert("User email missing — cannot update!");
+      window.location.href = `/update.html?email=${encodeURIComponent(email)}`;
+    });
+  </script>
+</body>
+</html>
+
+
+
+

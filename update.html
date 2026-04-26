@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Update Registration</title>
+  <link rel="stylesheet" href="update.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>✏️ Update Registration Details</h2>
+    <form id="updateForm">
+      <input type="text" id="regd_no" placeholder="Registration No" required />
+      <input type="text" id="name" placeholder="Full Name" required />
+      <input type="email" id="email" readonly />
+      <input type="password" id="password" placeholder="Password" required />
+      <input type="text" id="branch" placeholder="Branch" required />
+      <button type="submit" class="btn">Update</button>
+      <button type="button" class="btn secondary" onclick="goBack()">Back</button>
+    </form>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const email = params.get("email");
+    const form = document.getElementById("updateForm");
+
+    async function loadUserData() {
+      if (!email) {
+        alert("⚠️ No email found in URL!");
+        return;
+      }
+      const res = await fetch(`/users/${email}`);
+      if (res.ok) {
+        const user = await res.json();
+        document.getElementById("regd_no").value = user.regd_no;
+        document.getElementById("name").value = user.name;
+        document.getElementById("email").value = user.email;
+        document.getElementById("password").value = user.password;
+        document.getElementById("branch").value = user.branch;
+      } else {
+        alert("⚠️ Could not load user data");
+      }
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const data = {
+        regd_no: document.getElementById("regd_no").value,
+        name: document.getElementById("name").value,
+        password: document.getElementById("password").value,
+        branch: document.getElementById("branch").value,
+      };
+
+      const res = await fetch(`/update/${email}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (res.ok) {
+        alert("✅ Registration updated successfully!");
+        window.location.href = `/success.html?email=${encodeURIComponent(email)}`;
+      } else {
+        alert("⚠️ Failed to update registration");
+      }
+    });
+
+    function goBack() {
+      window.location.href = `/success.html?email=${encodeURIComponent(email)}`;
+    }
+
+    loadUserData();
+  </script>
+</body>
+</html>
+
+

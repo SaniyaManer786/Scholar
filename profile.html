@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Student Profile Form</title>
+  <style>
+    /* ===== GLOBAL RESET ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html,body { height: 100%; }
+    body {
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      background: linear-gradient(180deg,#dcedff 0%, #bbdefb 100%);
+      color: #073763;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 1.2rem;
+    }
+
+    /* ===== HEADER ===== */
+    .header {
+      width: 100%;
+      max-width: 1100px;
+      background: linear-gradient(90deg,#083d77,#1565c0);
+      color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 8px 28px rgba(3,37,76,0.18);
+    }
+    .header .title {
+      padding: 1.1rem 1.2rem;
+      text-align: center;
+    }
+    .header h1 {
+      font-size: 1.6rem;
+      letter-spacing: 0.6px;
+      margin-bottom: 0.2rem;
+      font-weight: 700;
+    }
+    .instruction {
+      background: rgba(255,255,255,0.06);
+      padding: 0.55rem 1.2rem;
+      text-align: center;
+      color: rgba(227,242,253,0.95);
+      font-size: 0.98rem;
+    }
+
+    /* ===== FORM CARD ===== */
+    .card {
+      width: 100%;
+      max-width: 1100px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 14px;
+      padding: 1.2rem;
+      box-shadow: 0 10px 35px rgba(13, 71, 161, 0.12);
+      border-left: 6px solid rgba(13,71,161,0.08);
+    }
+
+    form.profile-form {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .section {
+      background: linear-gradient(180deg, rgba(13,71,161,0.03), transparent);
+      border-radius: 10px;
+      padding: 1rem;
+      border: 1px solid rgba(13,71,161,0.06);
+    }
+
+    .section-header {
+      display:flex;
+      align-items:center;
+      gap:0.6rem;
+      margin-bottom:0.8rem;
+    }
+    .section-header h2 {
+      color: #0d47a1;
+      font-size:1.05rem;
+      font-weight:700;
+    }
+    .hint { font-size:0.9rem; color:#1565c0; opacity:0.85; }
+
+    /* ===== FORM ROWS ===== */
+    .grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap:1rem; }
+    .grid-3 { display:grid; grid-template-columns: repeat(3,1fr); gap:1rem; }
+    .form-row { display:flex; flex-direction:column; gap:0.35rem; margin-bottom:0.25rem; }
+    label { font-weight:600; color:#073763; font-size:0.95rem; }
+    input[type="text"],
+    input[type="email"],
+    input[type="number"],
+    select {
+      padding:0.65rem;
+      border-radius:7px;
+      font-size:0.98rem;
+      border:1.8px solid rgba(9,88,173,0.18);
+      background:#f6fbff;
+      outline:none;
+      transition: all .18s ease;
+    }
+    input:focus, select:focus {
+      border-color: #1565c0;
+      box-shadow: 0 4px 14px rgba(21,101,192,0.12);
+      background: #ffffff;
+    }
+
+    .small { font-size:0.85rem; color:#0d47a1; opacity:0.9; }
+
+    /* radio & checkbox groups */
+    .inline-group { display:flex; gap:1rem; align-items:center; flex-wrap:wrap; }
+    .inline-group label { font-weight:500; font-size:0.92rem; }
+    .inline-group input[type="radio"],
+    .inline-group input[type="checkbox"] { transform:scale(1.05); margin-right:0.35rem; }
+
+    /* submit area */
+    .form-actions { text-align:center; margin-top:0.6rem; padding-top:0.6rem; }
+    .submit-btn {
+      background: linear-gradient(90deg,#083d77,#0d47a1);
+      color:#fff;
+      border:none;
+      padding:0.85rem 1.6rem;
+      border-radius:9px;
+      font-weight:700;
+      font-size:1rem;
+      cursor:pointer;
+      box-shadow: 0 8px 20px rgba(13,71,161,0.12);
+      transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(13,71,161,0.16); }
+
+    .note { text-align:center; font-size:0.9rem; color:#0d47a1; margin-top:0.6rem; }
+
+    /* success message */
+    .success-message {
+      display:none;
+      margin-top:0.7rem;
+      text-align:center;
+      color: #1b5e20;
+      font-weight:700;
+      background: #e8f5e9;
+      padding:0.5rem;
+      border-radius:8px;
+      border:1px solid rgba(27,94,32,0.08);
+    }
+
+    /* responsive */
+    @media (max-width:900px) {
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+    <!-- === PAGE TITLE SECTION (ADDED AT TOP) === -->
+<div style="
+  width: 100%;
+  text-align: center;
+  background-color: #e3f2fd;
+  padding: 20px 10px 10px 10px;
+  border-radius: 8px;
+  max-width: 1100px;
+  box-shadow: 0 3px 10px rgba(13,71,161,0.08);
+">
+  <h1 style="color:#083d77; font-weight:700; font-size:1.9rem; margin-bottom:6px;">
+    Student Profile Form
+  </h1>
+  <p style="color:#0d47a1; font-size:1rem; font-style:italic;">
+    Please ensure all details are accurate and verified before submission.
+  </p>
+</div>
+
+
+  <header class="header" role="banner">
+    <div class="title">
+      <h1>Student Profile Form</h1>
+    </div>
+    <p class="instruction">Please ensure all details are accurate and verified before submission.</p>
+  </header>
+
+  <main class="card" role="main">
+    <form id="profileForm" class="profile-form" autocomplete="off" novalidate>
+
+      <!-- PERSONAL & CONTACT -->
+      <section class="section" aria-labelledby="personalHeading">
+        <div class="section-header">
+          <h2 id="personalHeading">Personal & Contact Details</h2>
+          <span class="hint">(required fields marked *)</span>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-row">
+            <label for="reg_number">Registration / Roll Number <span style="color:#c62828">*</span></label>
+            <input id="reg_number" name="reg_number" type="text" placeholder="University / School ID" required />
+          </div>
+
+          <div class="form-row">
+            <label for="full_name">Full Name <span style="color:#c62828">*</span></label>
+            <input id="full_name" name="full_name" type="text" placeholder="As per official records" required />
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-row">
+            <label for="gender">Gender <span style="color:#c62828">*</span></label>
+            <div class="inline-group" id="gender">
+              <label><input type="radio" name="gender" value="male" required /> Male</label>
+              <label><input type="radio" name="gender" value="female" /> Female</label>
+              <label><input type="radio" name="gender" value="other" /> Other</label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="live_at">Living At <span style="color:#c62828">*</span></label>
+            <div class="inline-group" id="live_at">
+              <label><input type="radio" name="living" value="hostel" required /> Hostel</label>
+              <label><input type="radio" name="living" value="house" /> House</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-row">
+            <label for="email">Email <span style="color:#c62828">*</span></label>
+            <input id="email" name="email" type="email" placeholder="Enter active email address" required />
+          </div>
+
+          <div class="form-row">
+            <label for="nationality">Nationality</label>
+            <input id="nationality" name="nationality" type="text" placeholder="e.g., Indian" />
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ACADEMIC & FINANCIAL -->
+      <section class="section" aria-labelledby="academicHeading">
+        <div class="section-header">
+          <h2 id="academicHeading">Academic & Financial Information</h2>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-row">
+            <label for="course_type">Course Type <span style="color:#c62828">*</span></label>
+            <select id="course_type" name="course_type" required>
+              <option value="" disabled selected>-- Select Course Type --</option>
+              <option value="ug">Undergraduate (UG)</option>
+              <option value="pg">Postgraduate (PG)</option>
+              <option value="engineering">Engineering</option>
+              <option value="diploma">Diploma</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <label for="branch">Branch / Program of Study <span style="color:#c62828">*</span></label>
+            <select id="branch" name="branch" required>
+              <option value="" disabled selected>-- Select Branch --</option>
+              <option value="cs">Computer Science</option>
+              <option value="it">Information Technology</option>
+              <option value="ec">Electronics & Communication</option>
+              <option value="me">Mechanical Engineering</option>
+              <option value="ce">Civil Engineering</option>
+              <option value="ba">Business Administration</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-row">
+            <label for="college_city">City of College <span style="color:#c62828">*</span></label>
+            <input id="college_city" name="college_city" type="text" placeholder="City where your college is located" required />
+          </div>
+
+          <div class="form-row">
+            <label for="distance_km">Distance from Home (km)</label>
+            <input id="distance_km" name="distance_km" type="number" min="0" step="0.1" placeholder="e.g., 12.5" />
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="form-row">
+            <label for="marks_10">10th Marks (%)</label>
+            <input id="marks_10" name="marks_10" type="number" min="0" max="100" step="0.01" placeholder="e.g., 86.50" />
+          </div>
+
+          <div class="form-row">
+            <label for="marks_12">12th Marks (%)</label>
+            <input id="marks_12" name="marks_12" type="number" min="0" max="100" step="0.01" placeholder="e.g., 88.20" />
+          </div>
+
+          <div class="form-row">
+            <label for="marks_grad">Graduation Marks (%) / GPA</label>
+            <input id="marks_grad" name="marks_grad" type="number" min="0" max="100" step="0.01" placeholder="e.g., 75.00 or GPA" />
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-row">
+            <label for="highest_qual">Highest Qualification</label>
+            <select id="highest_qual" name="highest_qual">
+              <option value="" disabled selected>-- Select Highest Qualification --</option>
+              <option value="10th">10th</option>
+              <option value="12th">12th</option>
+              <option value="graduation">Graduation</option>
+              <option value="postgrad">Post-Graduation</option>
+            </select>
+          </div>
+
+          <div class="form-row" id="backlogRow" style="display:none;">
+            <label for="has_backlog">Any Backlogs?</label>
+            <div class="inline-group">
+              <label><input type="radio" name="has_backlog" value="no" checked /> No</label>
+              <label><input type="radio" name="has_backlog" value="yes" /> Yes</label>
+              <input id="backlog_count" name="backlog_count" type="number" min="0" step="1" placeholder="If yes, how many?" style="width:130px; margin-left:10px; display:none;" />
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="align-items:end;">
+          <div class="form-row">
+            <label for="family_income">Family Annual Income (₹) <span style="color:#c62828">*</span></label>
+            <input id="family_income" name="family_income" type="number" min="0" placeholder="Enter annual income" required />
+          </div>
+
+          <div class="form-row">
+            <label for="caste_category">Caste / Category</label>
+            <select id="caste_category" name="caste_category">
+              <option value="" disabled selected>-- Select Category --</option>
+              <option value="gen">General</option>
+              <option value="obc">OBC</option>
+              <option value="sc">SC</option>
+              <option value="st">ST</option>
+              <option value="ews">EWS/Other</option>
+            </select>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SCHOLARSHIP & AREA -->
+      <section class="section" aria-labelledby="otherHeading">
+        <div class="section-header">
+          <h2 id="otherHeading">Scholarship, Area & Misc</h2>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-row">
+            <label>Do you already have any scholarship?</label>
+            <div class="inline-group">
+              <label><input type="radio" name="has_scholar" value="no" checked /> No</label>
+              <label><input type="radio" name="has_scholar" value="yes" /> Yes</label>
+            </div>
+          </div>
+
+          <div class="form-row" id="scholarshipDetails" style="display:none;">
+            <label for="scholarship_name">Scholarship Details</label>
+            <input id="scholarship_name" name="scholarship_name" type="text" placeholder="Scholarship name / amount / agency" />
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-row">
+            <label>Area Type</label>
+            <div class="inline-group">
+              <label><input type="radio" name="area_type" value="urban" /> Urban</label>
+              <label><input type="radio" name="area_type" value="rural" /> Rural</label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="other_notes">Any other notes (optional)</label>
+            <input id="other_notes" name="other_notes" type="text" placeholder="E.g., special needs, transport preference" />
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ACTIONS -->
+      <div class="form-actions">
+        <button type="submit" class="submit-btn">Submit Form</button>
+        <p class="note"><span style="color:#c62828">*</span> Indicates mandatory fields</p>
+        <p id="successMessage" class="success-message">✅ Form submitted successfully!</p>
+      </div>
+
+    </form>
+  </main>
+
+  <footer style="max-width:1100px; width:100%; text-align:center; font-size:0.9rem; color:#083d77;">
+    &copy; 2025 Student Portal | All Rights Reserved
+  </footer>
+<script>
+  const profileForm = document.getElementById('profileForm');
+  const successMessage = document.getElementById('successMessage');
+
+  profileForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    successMessage.style.display = 'none';
+
+    // Collect form data
+    const gender = document.querySelector('input[name="gender"]:checked')?.value || '';
+    const course_type = document.getElementById('course_type').value || '';
+    const branch = document.getElementById('branch').value || '';
+    const family_income = document.getElementById('family_income').value || 0;
+    const caste_category = document.getElementById('caste_category').value || 'All';
+    const area_type = document.querySelector('input[name="area_type"]:checked')?.value || 'All';
+    const marks_12 = document.getElementById('marks_12').value || 0;
+
+    try {
+      const response = await fetch('/fetch-scholarships', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          gender, course_type, branch, family_income, caste_category, area_type, marks_12
+        })
+      });
+
+      const scholarships = await response.json();
+
+      // Create or clear container
+      let container = document.getElementById('scholarshipResults');
+      if (!container) {
+        container = document.createElement('div');
+        container.id = 'scholarshipResults';
+        container.style.marginTop = '25px';
+        container.style.display = 'grid';
+        container.style.gridTemplateColumns = 'repeat(auto-fit, minmax(300px, 1fr))';
+        container.style.gap = '15px';
+        profileForm.parentNode.appendChild(container);
+      }
+      container.innerHTML = '';
+
+      if (!Array.isArray(scholarships) || scholarships.length === 0) {
+        container.innerHTML = '<p style="text-align:center;grid-column:1/-1;">❌ No scholarships found for your profile.</p>';
+        return;
+      }
+
+      successMessage.style.display = 'block';
+      successMessage.textContent = `✅ ${scholarships.length} scholarship(s) found!`;
+
+      scholarships.forEach(s => {
+        const card = document.createElement('div');
+        card.style.cssText = `
+          border: 1px solid #1565c0;
+          padding: 15px;
+          border-radius: 10px;
+          background: linear-gradient(180deg, #e3f2fd, #bbdefb);
+          box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+          transition: transform 0.2s, box-shadow 0.2s;
+        `;
+        card.onmouseover = () => { card.style.transform = 'translateY(-5px)'; };
+        card.onmouseout = () => { card.style.transform = 'translateY(0)'; };
+
+        card.innerHTML = `
+          <h3 style="color:#083d77; margin-bottom:6px;">${s.scholarship_name}</h3>
+          <p><b>Provider:</b> ${s.provider_type}</p>
+          <p><b>Amount:</b> ${s.amount_given}</p>
+          <p><b>Eligibility:</b> Gender: ${s.eligible_gender}, Class: ${s.eligible_class}, Stream: ${s.eligible_stream}</p>
+          <p><b>Income Criteria:</b> ${s.income_criteria}</p>
+          <p><b>Documents:</b> ${s.documents_needed}</p>
+          <p><a href="${s.youtube_link}" target="_blank" style="color:#0d47a1;">🎥 Watch Video</a></p>
+        `;
+        container.appendChild(card);
+      });
+    } catch (err) {
+      console.error(err);
+      alert('⚠️ Error fetching scholarships. Check console for details.');
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Successful</title>
+  <link rel="stylesheet" href="success.css">
+</head>
+<body>
+  <div class="message-container">
+    <h2>✅ Login Successful!</h2>
+    <p class="welcome-text">Welcome, <span id="username"></span> 🎓</p>
+    <div class="btn-group">
+      <a id="profileLink" href="profile.html" class="btn">Go to Profile Page</a>
+      <a href="login.html" class="btn">Logout</a>
+    </div>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name");
+    if (name) {
+      document.getElementById("username").textContent = name;
+      document.getElementById("profileLink").href = "profile.html?name=" + encodeURIComponent(name);
+    }
+  </script>
+</body>
+</html>

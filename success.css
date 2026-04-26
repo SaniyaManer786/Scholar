@@ -1,0 +1,89 @@
+/* Global body styles */
+body {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* Card container */
+.message-container {
+  background-color: #fff;
+  padding: 50px 40px;
+  border-radius: 25px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
+  transition: all 0.3s ease;
+}
+
+.message-container:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
+}
+
+/* Headings */
+h2 {
+  font-size: 30px;
+  color: #0077b6;
+  margin-bottom: 15px;
+  letter-spacing: 0.5px;
+}
+
+/* Text */
+p {
+  font-size: 18px;
+  color: #023e8a;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+/* Buttons container */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Common button style */
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  border-radius: 15px;
+  background: linear-gradient(to right, #00b4d8, #0077b6);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+/* Hover animation */
+.btn:hover {
+  transform: scale(1.07);
+  box-shadow: 0 8px 25px rgba(0, 119, 182, 0.4);
+}
+
+/* Update button */
+.update-btn {
+  background: linear-gradient(to right, #f4a261, #e76f51);
+}
+.update-btn:hover {
+  background: linear-gradient(to right, #e76f51, #c44536);
+}
+
+/* Delete button */
+.delete-btn {
+  background: linear-gradient(to right, #ef476f, #d00000);
+}
+.delete-btn:hover {
+  background: linear-gradient(to right, #d00000, #9d0208);
+}
+
